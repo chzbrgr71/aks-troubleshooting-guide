@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stress-ng
+  labels:
+    app: stress-ng
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stress-ng
+  template:
+    metadata:
+      labels:
+        app: stress-ng
+    spec:
+      containers:
+      - name: stress-ng
+        image: alexeiled/stress-ng
+        args: ["--cpu", "4", "--timeout", "0", "--io", "2", "--vm", "1"]
+# run with 4 cpu stressors, 2 io stressors and 1 vm stressor using 1GB of virtual memory
