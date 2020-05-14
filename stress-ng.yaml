@@ -5,7 +5,7 @@ metadata:
   labels:
     app: stress-ng
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: stress-ng
@@ -17,5 +17,4 @@ spec:
       containers:
       - name: stress-ng
         image: alexeiled/stress-ng
-        args: ["--cpu", "4", "--timeout", "0", "--io", "2", "--vm", "1"]
-# run with 4 cpu stressors, 2 io stressors and 1 vm stressor using 1GB of virtual memory
+        args: ["--cpu", "4", "--cpu-method", "all", "--timeout", "0", "--vm", "2", "--vm-bytes", "33%", "--vm-method", "all"]

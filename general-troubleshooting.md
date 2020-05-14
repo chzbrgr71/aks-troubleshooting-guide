@@ -60,18 +60,25 @@
 
 * Create stress on a node(s)
 
-    ```bash     
-    kubectl apply -f stress-ng.yaml
+    You can use something like [stress-ng](https://wiki.ubuntu.com/Kernel/Reference/stress-ng), fio, or dbench for this kind of thing. 
 
-    # OR
+    ```bash     
+    # run pods on multiple nodes
+    kubectl apply -f stress-ng.yaml
+    ```
+   
+    ```bash
+    # run interactively
 
     kubectl run -it --rm aks-stress-ng --image=ubuntu
     apt-get update && apt-get install stress-ng -y
 
+    # examples
+    stress-ng --cpu 4 --cpu-method all --vm 10 --vm-bytes 75% --vm-method all 
     stress-ng --all 0 --maximize --aggressive
     stress-ng --random 64
-    stress-ng --cpu 64 --cpu-method all --vm 8 --vm-bytes 80%
     stress-ng --cpu 64 --cpu-method all --vm 4 --vm-bytes 1G
+    stress-ng --vm 2 --vm-bytes 2G --mmap 2 --mmap-bytes 2G --page-in
     ```
 
 #### Workload Troubleshooting
@@ -102,6 +109,8 @@
         ERROR :: CONNECTION TO DATABASE FAILED AT Tue, 12 May 2020 16:09:20 GMT
         ERROR OUTPUT :: "MongoError: Authentication failed."
         NUMBER OF CONNECTION TRIES 2
+
+        echo d3Jvbmc= | base64 -d
 
         # must fix the secret for the pod
         kubectl delete secret db-secret -n hackfest
@@ -136,8 +145,8 @@
     service-tracker-ui-5dfbf6b8b8-nqwrj   1/1     Running   0          23h
     weather-api-79786fc7c5-lplv5          1/1     Running   0          23h
 
-    kubectl exec -it -n hackfest weather-api-79786fc7c5-lplv5 -- /bin/bash
-    kubectl exec -it -n hackfest weather-api-79786fc7c5-lplv5 -- /bin/sh
+    kubectl exec -it -n hackfest weather-api-76c886f99b-79mfp -- /bin/bash
+    kubectl exec -it -n hackfest weather-api-76c886f99b-79mfp -- /bin/sh
     
     # then run troubleshooting commands
     $> echo $DATA_SERVICE_URI
