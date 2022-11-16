@@ -5,10 +5,9 @@ This repo contains some guides and walkthroughs on troubleshooting in Azure Kube
 ### Topic Areas
 
 * [General Troubleshooting](./general-troubleshooting.md)
-* [Networking](./networking.md)
-* [DNS](./dns.md)
-* [I/O Latency](./io-latency.md)
-* [Windows Containers](./windows-containers.md)
+* Networking
+* DNS
+* I/O Latency
 
 ### Tools to make your life easier
 
